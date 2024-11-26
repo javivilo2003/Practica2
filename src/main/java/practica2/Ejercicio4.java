@@ -184,12 +184,18 @@ public class Ejercicio4 {
      */
 
     public static boolean esPrimo(int numero){
-        boolean primo;
-        if (numero == 2 || numero % 2 != 0 ){
-            primo = true;
-        } else {
-            primo = false;
-            System.out.println("Intentalo de nuevo.");
+        boolean primo = true; // Iniciamos diciendo que si es primo
+
+        if (numero <= 1){
+            primo = false; // Los números menor o igual a 1 no son primos
+        }else{
+            //Sacamos la raíz cuadrada del número para que el código sea más eficiente
+            // y no recorra números de más, solo el número de su raíz cuadrada, acortando el rango del bucle.
+            for( int i = 2; i <= Math.sqrt(numero); i++){
+                if (numero % i == 0){ // Si el numero tiene divisor no es primo
+                    primo = false;
+                }
+            }
         }
         return primo;
     }

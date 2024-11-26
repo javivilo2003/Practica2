@@ -200,6 +200,10 @@ public class Ejercicio4 {
         return primo;
     }
 
+    /**
+     * Función que pregunta si se desea volver al menú principal o salir de la app
+     * @return devuelve true si se quiere seguir o false si no se quiere.
+     */
     public static boolean seguirEnPrograma() {
         Scanner sc = new Scanner(System.in);
         char continuar;

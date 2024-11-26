@@ -82,6 +82,7 @@ public class Ejercicio4 {
 
     public static int cantidadDeDias(int mes){
         int dias = 0;
+
         switch(mes){
             case 1, 3, 5, 7, 8, 10, 12 -> dias = 31;
             case 2 -> dias = 28;
@@ -158,7 +159,6 @@ public class Ejercicio4 {
         }else {
             total = 0;
         }
-
         return total;
     }
 
@@ -170,13 +170,11 @@ public class Ejercicio4 {
      */
 
     public static double aplicarDescuento(double importe, int descuento){
-
         double importeTotal = 0;
          importeTotal = importe - (importe * descuento / 100);
         return importeTotal;
 
     }
-
     /**
      * Función que dice si el numero introducido es primo o no
      * @param numero numero introducido por consola
@@ -207,7 +205,7 @@ public class Ejercicio4 {
     public static boolean seguirEnPrograma() {
         Scanner sc = new Scanner(System.in);
         char continuar;
-        boolean seguirBucle;
+        boolean seguirBucle = false;
         boolean seguir = false;
 
         do {
@@ -217,9 +215,7 @@ public class Ejercicio4 {
 
             if (continuar == 'S') {
                 seguir = true;
-                seguirBucle = false;
             } else if (continuar == 'N') {
-                seguirBucle = false;
                 System.out.println("\nHasta pronto :D ");
             } else {
                 System.out.println("\nDame una respuesta correcta");
@@ -274,11 +270,21 @@ public class Ejercicio4 {
                     continuar = seguirEnPrograma();
                 }
                 case 3 -> {
-                    System.out.println("Introduce el mes: ");
-                    mes = sc.nextInt();
-                    numeroAleatorio(cantidadDeDias(mes));
-                    diasDisponibles(mes);
-                    continuar = seguirEnPrograma();
+
+                    do {
+                        System.out.println("Introduce el mes: ");
+                        mes = sc.nextInt();
+                        if (mes < 1 || mes > 12){
+                            System.out.println("Mes introducido incorrecto. Intentalo de nuevo.");
+                        }else{
+                            numeroAleatorio(cantidadDeDias(mes));
+                            diasDisponibles(mes);
+                            continuar = seguirEnPrograma();
+                        }
+
+                    }while(mes < 1 || mes > 12);
+
+
                 }
                 case 4 -> {
                     char verDescuento;
@@ -309,7 +315,6 @@ public class Ejercicio4 {
                             System.out.println("Introduce S/N, por favor");
                         }
 
-
                     }while(respuestaIncorrecta);
 
                     System.out.println("Aplicable descuento del " + descuento + "%");
@@ -324,7 +329,7 @@ public class Ejercicio4 {
                     System.out.println(esPrimo(numPremio));
                     continuar = seguirEnPrograma();
                 }
-                case 6 -> System.out.println("\nHasta pronto :D ");
+                case 6 -> System.out.println("\nHasta pronto :D");
                 default -> {
                     System.out.println("\nOpción no disponible... Vuelva a intentarlo.");
                     continuar = seguirEnPrograma();

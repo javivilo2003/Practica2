@@ -228,6 +228,35 @@ public class Ejercicio4 {
 
     }
 
+    /**
+     * Funcion que imprime el importe total en función de lo que
+     * escoja el usuario, si decide que si, se imprimo, si decide que no, no se imprime
+     * @param total el total de las entradas compradas
+     */
+
+    public static void consultarImporte(double total){
+        Scanner sc = new Scanner(System.in);
+        char verDescuento;
+        boolean respuestaIncorrecta = true;
+        do {
+            System.out.println("Deseas consultar cuál será el importe en función " +
+                    "del número de entradas (S/N): ");
+            verDescuento = sc.next().toUpperCase().charAt(0);
+
+            if (verDescuento == 'S') {
+                System.out.println("Importe total: " + total);
+                respuestaIncorrecta = false;
+
+            } else if (verDescuento == 'N') {
+                respuestaIncorrecta = false;
+
+            }else {
+                System.out.println("Introduce S/N, por favor");
+            }
+
+        }while(respuestaIncorrecta);
+
+    }
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -270,7 +299,6 @@ public class Ejercicio4 {
                     continuar = seguirEnPrograma();
                 }
                 case 3 -> {
-
                     do {
                         System.out.println("Introduce el mes: ");
                         mes = sc.nextInt();
@@ -279,17 +307,13 @@ public class Ejercicio4 {
                         }else{
                             numeroAleatorio(cantidadDeDias(mes));
                             diasDisponibles(mes);
-                            continuar = seguirEnPrograma();
                         }
 
                     }while(mes < 1 || mes > 12);
-
-
+                    continuar = seguirEnPrograma();
                 }
                 case 4 -> {
-                    char verDescuento;
                     mostrarPrecios();
-
                     System.out.println("Dime la cantidad de entradas reducidas: ");
                     int reducida = sc.nextInt();
                     System.out.println("Dime la cantidad de entradas generales: ");
@@ -297,26 +321,8 @@ public class Ejercicio4 {
                     double total = calcularImporte(reducida, generales);
                     int descuento = descuentoAsociado(total);
                     double aplicarDescuento = aplicarDescuento(total, descuento);
-                    boolean respuestaIncorrecta = true;
 
-                    do {
-                        System.out.println("Deseas consultar cuál será el importe en función " +
-                                "del número de entradas (S/N): ");
-                        verDescuento = sc.next().toUpperCase().charAt(0);
-
-                        if (verDescuento == 'S') {
-                            System.out.println("Importe total: " + total);
-                            respuestaIncorrecta = false;
-
-                        } else if (verDescuento == 'N') {
-                            respuestaIncorrecta = false;
-
-                        }else {
-                            System.out.println("Introduce S/N, por favor");
-                        }
-
-                    }while(respuestaIncorrecta);
-
+                    consultarImporte(total);
                     System.out.println("Aplicable descuento del " + descuento + "%");
                     System.out.println("Importe Final: " + aplicarDescuento);
                     continuar = seguirEnPrograma();

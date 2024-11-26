@@ -241,6 +241,7 @@ public class Ejercicio4 {
         String usuario = sc.nextLine();
         System.out.println("Establece una contraseña: ");
         String password = sc.nextLine();
+        System.out.println("Registro realizado :D");
 
         String user;
         String pssww;

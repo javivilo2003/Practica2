@@ -190,7 +190,7 @@ public class Ejercicio4 {
             primo = false; // Los números menor o igual a 1 no son primos
         }else{
             //Sacamos la raíz cuadrada del número para que el código sea más eficiente
-            // y no recorra números de más, solo el número de su raíz cuadrada, acortando el rango del bucle.
+            // y no recorra números de más, solo el número de su raíz cuadrada acortando el rango del bucle.
             for( int i = 2; i <= Math.sqrt(numero); i++){
                 if (numero % i == 0){ // Si el numero tiene divisor no es primo
                     primo = false;
@@ -198,6 +198,34 @@ public class Ejercicio4 {
             }
         }
         return primo;
+    }
+
+    public static boolean seguirEnPrograma() {
+        Scanner sc = new Scanner(System.in);
+        char continuar;
+        boolean seguirBucle;
+        boolean seguir = false;
+
+        do {
+            System.out.println("\nDesea volver al menú de opciones (S) o salir (N)");
+            continuar = sc.next().toUpperCase().charAt(0);
+
+
+            if (continuar == 'S') {
+                seguir = true;
+                seguirBucle = false;
+            } else if (continuar == 'N') {
+                seguirBucle = false;
+                System.out.println("\nHasta pronto :D ");
+            } else {
+                System.out.println("\nDame una respuesta correcta");
+                seguirBucle = true;
+            }
+
+        } while (seguirBucle);
+
+        return seguir;
+
     }
 
 
@@ -224,6 +252,7 @@ public class Ejercicio4 {
 
         int opcion;
 
+        boolean continuar = false;
         do {
             mostrarMenuOpciones();
             System.out.println("Escribe la opción que deseas: ");
@@ -231,34 +260,56 @@ public class Ejercicio4 {
             int mes;
 
             switch (opcion) {
-                case 1 -> mostrarAtracciones();
-                case 2 -> mostrarRestaurantes();
+                case 1 -> {
+                    mostrarAtracciones();
+                    continuar = seguirEnPrograma();
+                }
+                case 2 -> {
+                    mostrarRestaurantes();
+                    continuar = seguirEnPrograma();
+                }
                 case 3 -> {
                     System.out.println("Introduce el mes: ");
                     mes = sc.nextInt();
                     numeroAleatorio(cantidadDeDias(mes));
                     diasDisponibles(mes);
-
+                    continuar = seguirEnPrograma();
                 }
                 case 4 -> {
                     char verDescuento;
                     mostrarPrecios();
-                    System.out.println("Deseas consultar cuál será el importe en función del número de entradas (S/N): ");
-                    verDescuento = sc.next().charAt(0);
+
                     System.out.println("Dime la cantidad de entradas reducidas: ");
                     int reducida = sc.nextInt();
                     System.out.println("Dime la cantidad de entradas generales: ");
                     int generales = sc.nextInt();
                     double total = calcularImporte(reducida, generales);
-                    System.out.println("Importe total: " + total);
                     int descuento = descuentoAsociado(total);
                     double aplicarDescuento = aplicarDescuento(total, descuento);
+                    boolean respuestaIncorrecta = true;
 
-                    if (verDescuento == 's' || verDescuento == 'S') {
-                        System.out.println("Aplicable descuento del " + descuento + "%");
-                    }
+                    do {
+                        System.out.println("Deseas consultar cuál será el importe en función " +
+                                "del número de entradas (S/N): ");
+                        verDescuento = sc.next().toUpperCase().charAt(0);
 
+                        if (verDescuento == 'S') {
+                            System.out.println("Importe total: " + total);
+                            respuestaIncorrecta = false;
+
+                        } else if (verDescuento == 'N') {
+                            respuestaIncorrecta = false;
+
+                        }else {
+                            System.out.println("Introduce S/N, por favor");
+                        }
+
+
+                    }while(respuestaIncorrecta);
+
+                    System.out.println("Aplicable descuento del " + descuento + "%");
                     System.out.println("Importe Final: " + aplicarDescuento);
+                    continuar = seguirEnPrograma();
 
                 }
                 case 5 -> {
@@ -266,13 +317,16 @@ public class Ejercicio4 {
                     System.out.println("Introduce el número que quieras y podrás ganar un premio: ");
                     numPremio = sc.nextInt();
                     System.out.println(esPrimo(numPremio));
+                    continuar = seguirEnPrograma();
                 }
-                case 6 -> System.out.println("Hasta pronto :D ");
-                default -> System.out.println("Opción no disponible... Vuelva a intentarlo.");
-
+                case 6 -> System.out.println("\nHasta pronto :D ");
+                default -> {
+                    System.out.println("\nOpción no disponible... Vuelva a intentarlo.");
+                    continuar = seguirEnPrograma();
+                }
             }
 
-        } while (opcion != 6);
+        } while (opcion != 6 && continuar);
 
 
     }

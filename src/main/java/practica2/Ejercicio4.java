@@ -198,6 +198,21 @@ public class Ejercicio4 {
         return primo;
     }
 
+ /** Hace la suma de todos los divisores primos de un numero introducido por el usuario
+     * @param numero el mismo numero introducido para comprobar si es primo
+     * @return sumaDivisoresPrimos devuelve la suma de todos los divisores primos del numero
+     */
+    public static int sumaDivisoresPrimos(int numero){
+        int sumaDivisoresPrimos = 0;
+        for (int i = 1; i <= numero; i++){
+            do{
+                sumaDivisoresPrimos += i;
+            }while (esPrimo(i));
+            sumaDivisoresPrimos = 0;
+            
+        return sumaDivisoresPrimos;
+    }
+
     /**
      * Función que pregunta si se desea volver al menú principal o salir de la app
      * @return devuelve true si se quiere seguir o false si no se quiere.
